@@ -1,0 +1,24 @@
+# SPRING PROFILES
+spring:         
+  # HTTP ENCODING
+  http:
+    encoding.charset: UTF-8
+    encoding.enable: true
+    encoding.force: true
+  server:
+    port: 8080
+    address: 127.0.0.1
+
+monitor:
+  base:
+    path: http://127.0.0.1:8080/
+
+  # mysql
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/monitor?characterEncoding=utf-8&useUnicode=true&zeroDateTimeBehavior=convertToNull
+    username: monitor
+    password: monitor
+    driverClassName: com.mysql.jdbc.Driver
+
+
+
