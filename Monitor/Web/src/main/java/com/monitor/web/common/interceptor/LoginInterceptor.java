@@ -28,16 +28,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
-        // 处理 session
-//        handlerSession(request);
-
         final HandlerMethod handlerMethod = (HandlerMethod) handler;
         final Method method = handlerMethod.getMethod();
         final Class<?> clazz = method.getDeclaringClass();
 
         if (clazz.isAnnotationPresent(Auth.class) || method.isAnnotationPresent(Auth.class)) {
             if(request.getAttribute(LOGIN_SESSION_KEY) == null) {
-                throw new Exception();
+                throw new Exception("用户未登录");
             } else {
                 // 查看token是否已过期
                 return true;
@@ -46,21 +43,4 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         return true;
     }
-
-//    /**
-//     * 处理 session
-//     * @param request
-//     */
-//    public void handlerSession(HttpServletRequest request) {
-//        String token = request.getHeader(LOGIN_SESSION_KEY);
-//        if(org.apache.commons.lang3.StringUtils.isBlank(token)){
-//            token = (String) request.getSession().getAttribute(LOGIN_SESSION_KEY);
-//        } else {
-//            SessionData model = (SessionData) redisUtils.get(SESSION_KEY_PREFIX + token);
-//            if (model == null) {
-//                return ;
-//            }
-//            request.setAttribute(LOGIN_SESSION_KEY, token);
-//        }
-//    }
 }

@@ -54,23 +54,19 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/static/");
     }
 
+    /**
+     * 资源处理器
+     * @param registry
+     */
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedHeaders("*/*")
-                .allowedMethods("*")
-                .maxAge(120);
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        logger.info("addResourceHandlers");
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("classpath:/static/");
     }
 
-//    /**
-//     * 资源处理器
-//     * @param registry
-//     */
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        logger.info("addResourceHandlers");
-//        registry.addResourceHandler("/static/**")
-//                .addResourceLocations("classpath:/resources/static/");
-//    }
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
 }
