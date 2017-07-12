@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta name="description" content="Bootstrap Admin App + jQuery"/>
+  <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin"/>
+  <title>Monitor</title>
+  <link rel="icon" href="../static/img/icon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../static/vendor/bootstrap/css/bootstrap.css" />
+  <script th:src="@{../static/vendor/bootstrap/js/bootstrap.js}"></script>
+</head>
+  <body>
+    <div class="wrapper">
+      <div class="block-center mt-xl wd-xl">
+         <div class="panel panel-dark panel-flat">
+            <div class="panel-heading text-center">
+            </div>
+            <div class="panel-body" id="loginPage">
+               <p class="text-center pv">请登录</p>
+               <form id="form" data-parsley-validate="true" onsubmit="return false">
+                  <div class="form-group has-feedback">
+                     <input type="text" placeholder="邮箱地址或登录名称" v-model="username" class="form-control" data-parsley-error-message="请输入邮箱地址或登录名称" required="required" />
+                     <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                  </div>
+                  <div class="form-group has-feedback">
+                     <input type="password" placeholder="密码" v-model="password" class="form-control" data-parsley-error-message="请输入密码" required="required" />
+                     <span class="fa fa-lock form-control-feedback text-muted"></span>
+                  </div>
+                  <div class="clearfix">
+                     <div class="pull-right">
+                        <a href="/forgotPassword" class="text-muted">忘记密码？</a>
+                     </div>
+                  </div>
+                  <button v-on:click="login" class="btn btn-block btn-primary mt-lg">登录</button>
+               </form>
+               <p></p>
+               <div id="errorMsg" class="alert alert-danger text-center" style="display:none;"></div>
+               <p class="pt-lg text-center">需要注册？</p>
+               <a href="/register" class="btn btn-block btn-default">现在就注册</a>
+            </div>
+         </div>
+         <div class="p-lg text-center">
+            <span>&copy;</span>
+            <span>2016</span>
+            <span>-</span>
+            <span>2017</span>
+         </div>
+      </div>
+   </div>
+  </body>
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+</html>

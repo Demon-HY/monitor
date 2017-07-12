@@ -1,17 +1,15 @@
 package com.monitor.web;
 
-import com.monitor.web.common.interceptor.Auth;
 import org.apache.log4j.Logger;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
+ *
  * Created by Administrator on 2017/7/1 0001.
  */
 @RestController
@@ -40,7 +38,6 @@ public class WebController {
         return "register";
     }
 
-    @Auth
     @RequestMapping(value="/test")
     public String test(Model model){
         return "test";

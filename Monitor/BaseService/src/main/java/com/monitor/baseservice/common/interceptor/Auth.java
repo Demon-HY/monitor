@@ -1,4 +1,4 @@
-package com.monitor.web.common.interceptor;
+package com.monitor.baseservice.common.interceptor;
 
 import java.lang.annotation.*;
 
@@ -12,5 +12,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface Auth {
 
+    boolean continueCheck() default true;
 }
 
