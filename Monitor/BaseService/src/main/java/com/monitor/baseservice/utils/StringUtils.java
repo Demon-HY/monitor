@@ -3,7 +3,7 @@ package com.monitor.baseservice.utils;
 /**
  * 字符串处理工具类
  *
- * Created by Administrator on 2017/7/1 0001.
+ * Created by demon on 2017/7/1 0001.
  */
 public class StringUtils {
 

@@ -9,7 +9,7 @@ import java.security.SecureRandom;
 /**
  * 字符串的加密解密
  *
- * Created by Administrator on 2017/7/1 0001.
+ * Created by demon on 2017/7/1 0001.
  */
 public class DESEncryptionUtils {
 

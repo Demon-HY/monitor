@@ -13,7 +13,7 @@ import static com.monitor.baseservice.common.config.GlobalConfig.LOGIN_SESSION_K
 /**
  * 登录拦截器
  *
- * Created by Administrator on 2017/7/6 0006.
+ * Created by demon on 2017/7/6 0006.
  */
 @Component
 public class LoginInterceptor extends HandlerInterceptorAdapter {

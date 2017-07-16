@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * 文件相关工具类
  *
- * Created by Administrator on 2017/7/1 0001.
+ * Created by demon on 2017/7/1 0001.
  */
 public class FileUtils {
 

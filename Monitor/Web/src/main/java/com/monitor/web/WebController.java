@@ -6,11 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
-
 /**
  *
- * Created by Administrator on 2017/7/1 0001.
+ * Created by demon on 2017/7/1 0001.
  */
 @RestController
 @RequestMapping("/")
@@ -24,7 +22,7 @@ public class WebController {
     }
 
     @RequestMapping("/login")
-    public ModelAndView login(Map<String, Object> model) {
+    public ModelAndView login() {
         return new ModelAndView("login");
     }
 

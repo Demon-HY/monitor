@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * 时间相关操作类
  *
- * Created by Administrator on 2017/7/1 0001.
+ * Created by demon on 2017/7/1 0001.
  */
 public class DateUtils {
 

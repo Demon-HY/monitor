@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * 全局配置文件
  *
- * Created by Administrator on 2017/7/1 0001.
+ * Created by demon on 2017/7/1 0001.
  */
 @Component
 public class GlobalConfig {

@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 用户登录认证接口
- * Created by Administrator on 2017/7/1 0001.
+ * Created by demon on 2017/7/1 0001.
  */
 @RestController
 @Auth
-@RequestMapping("/auth/api/")
+@RequestMapping("/auth/api")
 public class AuthController {
 
     @Auth(continueCheck = false)
