@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * 登录 ID 表数据库接口
+ * 登录 ID 表(login_id) 数据库接口
  *
  * Created by demon on 2017/7/1 0001.
  */
@@ -37,6 +37,7 @@ public interface ILoginIdDao extends JpaRepository<LoginIdInfo, Long> {
      * @param value
      * @return
      */
-    @Query("select uid from login_id where type=:type and value=:value ")
-    long findByTypeAndValue(@Param("type") String type, @Param("value") String value);
+    Long findByTypeAndValue(String type, String value);
+//    @Query("select uid from login_id where type=:type and value=:value ")
+//    Long findByTypeAndValue(@Param("type") String type, @Param("value") String value);
 }

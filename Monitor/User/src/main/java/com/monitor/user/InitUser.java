@@ -2,6 +2,7 @@ package com.monitor.user;
 
 import com.alibaba.fastjson.JSONObject;
 import com.monitor.auth.ILoginIdDao;
+import com.monitor.user.domain.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,15 +31,20 @@ public class InitUser {
 
             @SuppressWarnings("unchecked")
             Map<String, Object> attrs = (Map<String, Object>) JSONObject.parse(attrStr);
-            loginIdDao.findByTypeAndValue("name", name);
-//            Long uid = beans.getAuthApi().getAuthModel().checkLoginId("name", name);
-//            UserInfo user = new UserInfo();
-//            user.name = name;
-//            user.password = password;
-//            user.nick = (String) attrs.get("nick");
-//            user.email = (String) attrs.get("email");
-//            user.status = (int) attrs.get("status");
-//            user.type = (int) attrs.get("type");
+            Long uid = loginIdDao.findByTypeAndValue("name", name);
+
+            UserInfo userInfo = new UserInfo();
+            userInfo.setName(name);
+            userInfo.setPassword(password);
+            userInfo.setNick((String) attrs.get("nick"));
+            userInfo.setEmail((String) attrs.get("email"));
+            userInfo.setStatus((Integer) attrs.get("status"));
+            userInfo.setType((Integer) attrs.get("type"));
+
+            if (null == uid) {
+
+            }
+
 //            if (null == uid) {
 //                user = beans.getUserApi().userRegister(env, user);
 //            } else {

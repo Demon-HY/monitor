@@ -1,6 +1,7 @@
 package com.monitor.user;
 
 import com.monitor.baseservice.common.aop.LoggerManage;
+import com.monitor.user.domain.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by demon on 2017/7/1 0001.
  */
 @RestController
-@RequestMapping("/user/")
+@RequestMapping("/user")
 public class UserController {
 
     @RequestMapping("/api/test")
@@ -19,6 +20,7 @@ public class UserController {
     public String test() {
         return "OK";
     }
+
 
 
 }

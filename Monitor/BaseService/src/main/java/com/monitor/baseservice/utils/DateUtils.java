@@ -18,6 +18,8 @@ public class DateUtils {
 
     public final static String DATE_SEQUENCE = "yyyyMMddHHmmssSSS";
 
+    public final static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
     /**
      * 获取时间序列，格式：
      * @return yyyyMMddHHmmssSSS

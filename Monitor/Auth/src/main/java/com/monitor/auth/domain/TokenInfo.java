@@ -1,5 +1,9 @@
 package com.monitor.auth.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.monitor.baseservice.utils.DateUtils;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -20,13 +24,17 @@ public class TokenInfo implements Serializable {
 
     /** 用户ID */
     @Column(name = "uid")
-    private long uid;
+    private Long uid;
 
     /** token的有效期限 */
+    @DateTimeFormat(pattern = DateUtils.DATE_FORMAT)
+    @JsonFormat(pattern = DateUtils.DATE_FORMAT)
     @Column(name = "expires")
     private Timestamp expires;
 
     /** 创建时间 */
+    @DateTimeFormat(pattern = DateUtils.DATE_FORMAT)
+    @JsonFormat(pattern = DateUtils.DATE_FORMAT)
     @Column(name = "ctime")
     private Timestamp ctime;
 
@@ -42,7 +50,7 @@ public class TokenInfo implements Serializable {
         return token;
     }
 
-    public long getUid() {
+    public Long getUid() {
         return uid;
     }
 
@@ -66,7 +74,7 @@ public class TokenInfo implements Serializable {
         this.token = token;
     }
 
-    public void setUid(long uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 
