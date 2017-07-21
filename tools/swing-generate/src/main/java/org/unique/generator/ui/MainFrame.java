@@ -220,7 +220,7 @@ public class MainFrame extends JFrame {
         contentPane.add(label_2);
 
         txt_author = new JTextField();
-        txt_author.setText("wangbin");
+        txt_author.setText("Demon");
         txt_author.setColumns(10);
         txt_author.setBounds(110, 294, 205, 25);
         contentPane.add(txt_author);
@@ -238,7 +238,7 @@ public class MainFrame extends JFrame {
         contentPane.add(txt_table_names);
 
         txt_package = new JTextField();
-        txt_package.setText("com.abcft.reportor");
+        txt_package.setText("com.demon");
         txt_package.setColumns(10);
         txt_package.setBounds(110, 225, 205, 25);
         contentPane.add(txt_package);

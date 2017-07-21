@@ -15,22 +15,22 @@ import java.util.List;
 @Service
 public class ${table.className}ServiceImpl  extends AbsCommonService<${table.className}> implements ${table.className}Service{
 
-	@Autowired
-	private ${table.className}Dao ${table.classNameFirstLower}Dao;
+@Autowired
+private ${table.className}Dao ${table.classNameFirstLower}Dao;
 
 
-	@Override
-	public PageInfo<${table.className}Vo> findByParams(${table.className}Vo ${table.classNameFirstLower}Vo,Integer pageNum,Integer pageSize) {
+@Override
+public PageInfo<${table.className}Vo> findByParams(${table.className}Vo ${table.classNameFirstLower}Vo,Integer pageNum,Integer pageSize) {
+
     PageHelper.startPage(pageNum, pageSize);
-    	List<${table.className}Vo>  list = ${table.classNameFirstLower}Dao.findByParams(${table.classNameFirstLower}Vo);
+
+    List<${table.className}Vo>  list = ${table.classNameFirstLower}Dao.findByParams(${table.classNameFirstLower}Vo);
         PageInfo page = new PageInfo(list);
         return page;
-	}
+    }
 
-
-	@Override
-	public ICommonDao<${table.className}> getDao() {
-		return ${table.classNameFirstLower}Dao;
-	}
-
+    @Override
+    public ICommonDao<${table.className}> getDao() {
+        return ${table.classNameFirstLower}Dao;
+    }
 }

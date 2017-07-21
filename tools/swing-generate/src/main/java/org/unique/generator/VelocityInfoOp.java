@@ -30,31 +30,23 @@ public class  VelocityInfoOp {
     public static void generatorCode(String templateFile, Map<String, Object> contextMap, String path, String fileName) {
         //设置模板载入路径
         VelocityContext context = new VelocityContext();
-
         //获取模板引擎
         VelocityEngine ve = new VelocityEngine();
-
         //模板文件所在的路径
         String vPath = System.getProperty("user.dir") + "\\template";
-
         //设置参数
         ve.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, vPath);
-
         //处理中文问题
         ve.setProperty(Velocity.INPUT_ENCODING, "UTF-8");
-
         ve.setProperty(Velocity.OUTPUT_ENCODING, "UTF-8");
-
         //初始化模板
         ve.init();
-
         //设置变量值
         for (Object key : contextMap.keySet()) {
             context.put(key.toString(), contextMap.get(key));
         }
 
         Template template = null;
-
         try {
             template = ve.getTemplate(templateFile);
         } catch (Exception e) {

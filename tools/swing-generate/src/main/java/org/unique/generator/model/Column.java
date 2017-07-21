@@ -15,7 +15,6 @@ public class Column {
      * 数据库中列名称
      */
     private String columnName;
-
     /**
      * 生成实体字段名称
      */
@@ -32,17 +31,14 @@ public class Column {
      * set方法
      */
     private String fieldSetMehtod;
-
     /**
      * 列数据类型
      */
     private int columnType;
-
     /**
      * 列注释
      */
     private String columnComment;
-
     /**
      * 是否主键
      */
@@ -55,7 +51,6 @@ public class Column {
      * 是否允许空
      */
     private boolean isNullAble=false;
-
     /**
      * 是否是外键
      */

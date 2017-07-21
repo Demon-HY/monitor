@@ -11,40 +11,40 @@ import org.unique.web.annotation.Controller;
 
 
 /**
- * 控制器
- * @author ${author}
- * @since 1.0
- */
+* 控制器
+* @author ${author}
+* @since 1.0
+*/
 @Controller
 public class ${table.className}Controller {
 
-	private Logger logger = Logger.getLogger(${table.className}Controller.class);
-	
-	@Autowired
-	private ${table.className}Service ${table.classNameFirstLower}Service;
-		
-	@Action("index")
-	public void index() {
-		
-	}
-	
-	@Action("page")
-	public String page(){
-		return "page";
-	}
-	
-	@Action("save")
-	public void save(){
-		
-	}
-	
-	@Action("delete")
-	public void delete(){
-		
-	}
-	
-	@Action("update")
-	public void update(){
-		
-	}
+    private Logger logger = Logger.getLogger(${table.className}Controller.class);
+
+    @Autowired
+    private ${table.className}Service ${table.classNameFirstLower}Service;
+
+    @Action("index")
+    public void index() {
+
+    }
+
+    @Action("page")
+    public String page(){
+    return "page";
+    }
+
+    @Action("save")
+    public void save(){
+
+    }
+
+    @Action("delete")
+    public void delete(){
+
+    }
+
+    @Action("update")
+    public void update(){
+
+    }
 }
