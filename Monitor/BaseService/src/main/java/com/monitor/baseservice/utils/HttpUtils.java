@@ -10,6 +10,8 @@ import java.net.URL;
  */
 public class HttpUtils {
 
+    private HttpUtils() { }
+
     /**
      * test if URL is connect
      * @param urlStr

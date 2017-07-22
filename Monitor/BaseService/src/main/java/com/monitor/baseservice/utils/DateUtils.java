@@ -1,7 +1,14 @@
 package com.monitor.baseservice.utils;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 时间相关操作类
@@ -10,15 +17,43 @@ import java.util.Date;
  */
 public class DateUtils {
 
-    private final static long minute = 60 * 1000;// 1分钟
-    private final static long hour = 60 * minute;// 1小时
-    private final static long day = 24 * hour;// 1天
-    private final static long month = 31 * day;// 月
-    private final static long year = 12 * month;// 年
+    private static Logger log = LogManager.getLogger(DateUtils.class);
+
+    private DateUtils() { }
+
+    /**  一秒=1000毫秒 */
+    public static final long SECOND = 1000L;
+    public final static long MONUTE = 60 * 1000;// 1分钟
+    public final static long HOUR = 60 * MONUTE;// 1小时
+    public final static long DAY = 24 * HOUR;// 1天
+    public final static long MONTH = 31 * DAY;// 月
+    public final static long year = 12 * MONTH;// 年
 
     public final static String DATE_SEQUENCE = "yyyyMMddHHmmssSSS";
-
-    public final static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    /** 通用的格式 */
+    public static final String GENERAL_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    /** 截止到分钟格式 */
+    public static final String MINT_PATTERN = "yyyy-MM-dd HH:mm";
+    /** 截止到小时格式 */
+    public static final String HOUR_PATTERN = "yyyy-MM-dd HH";
+    /** 截止到天格式 */
+    public static final String DAY_PATTERN = "yyyy-MM-dd";
+    /** 只返回时间格式 */
+    public static final String TIME_PATTERN = "HH:mm:ss";
+    /** 天数差 */
+    public static final int DIFF_DAY = 1;
+    /** 小时差 */
+    public static final int DIFF_HOUR = 2;
+    /** 分钟差 */
+    public static final int DIFF_MINUTE = 3;
+    /** 秒数差 */
+    public static final int DIFF_SECOND = 4;
+    /** 分钟毫秒数 */
+    public static final long MINT_MILLIS = 60 * SECOND;
+    /** 小时毫秒数 */
+    public static final long HOUR_MILLIS = 60 * MINT_MILLIS;
+    /** 天毫秒数 */
+    public static final long DAY_MILLIS = 24 * HOUR_MILLIS;
 
     /**
      * 获取时间序列，格式：
@@ -46,9 +81,7 @@ public class DateUtils {
      * @return 时间格式：yyyy-MM-dd HH:mm:ss
      */
     public static String longTimeToString(long time) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        return formatter.format(time);
+        return longTimeToString(time, GENERAL_PATTERN);
     }
 
     /**
@@ -69,6 +102,16 @@ public class DateUtils {
         SimpleDateFormat formatter = new SimpleDateFormat(format);
 
         return formatter.format(time);
+    }
+
+    /**
+     * 将 Date 时间格式化成指定格式
+     *
+     * @param date
+     *            java.util.Date
+     */
+    public static String dateToString(java.util.Date date) {
+        return dateToString(date, GENERAL_PATTERN);
     }
 
     /**
@@ -122,20 +165,20 @@ public class DateUtils {
             r = (diff / year);
             return r + "年前";
         }
-        if (diff > month) {
-            r = (diff / month);
+        if (diff > MONTH) {
+            r = (diff / MONTH);
             return r + "个月前";
         }
-        if (diff > day) {
-            r = (diff / day);
+        if (diff > DAY) {
+            r = (diff / DAY);
             return r + "天前";
         }
-        if (diff > hour) {
-            r = (diff / hour);
+        if (diff > HOUR) {
+            r = (diff / HOUR);
             return r + "个小时前";
         }
-        if (diff > minute) {
-            r = (diff / minute);
+        if (diff > MONUTE) {
+            r = (diff / MONUTE);
             return r + "分钟前";
         }
         return "刚刚";
@@ -160,6 +203,81 @@ public class DateUtils {
     }
 
     /**
+     * 计算两个时间差
+     *
+     * @param diffType
+     *            1:day 2:hour 3:minute 4:second
+     *
+     *            start or end time string format @see GENERAL_PATTERN yyyy-MM-dd HH:mm:ss
+     *
+     * @param start
+     * @param end
+     * @return long
+     */
+    public static long diffDate(int diffType, String start, String end) {
+        if (DIFF_DAY == diffType)
+            return doDiff(start, end, "yyyy-MM-dd", DAY_MILLIS);
+        else if (DIFF_HOUR == diffType)
+            return doDiff(start, end, "yyyy-MM-dd HH", HOUR_MILLIS);
+        else if (DIFF_MINUTE == diffType)
+            return doDiff(start, end, "yyyy-MM-dd HH:mm", MINT_MILLIS);
+        else if (DIFF_SECOND == diffType)
+            return doDiff(start, end, GENERAL_PATTERN, SECOND);
+        return 0;
+    }
+
+    /**
+     * 两个时间的秒数差
+     *
+     * @param start
+     * @param end
+     * @return long
+     */
+    private static long doDiff(String start, String end, String pattern, long millis) {
+        Date startDate = null;
+        Date endDate = null;
+        try {
+            SimpleDateFormat noopFormat = new SimpleDateFormat();
+            noopFormat.applyPattern(pattern);
+            startDate = noopFormat.parse(start);
+            endDate = noopFormat.parse(end);
+        } catch (ParseException e) {
+            log.error("diff date for diff calc error", e);
+            throw new RuntimeException(e);
+        }
+        return (endDate.getTime() - startDate.getTime()) / millis;
+    }
+
+    /**
+     * 获取昨天日期
+     * @author inning
+     * @DateTime 2015-7-20 上午11:37:27
+     * @param date
+     * @return
+     */
+    public static String getYesterDay(Date date) {
+        java.text.Format formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        long beforeTime = (date.getTime() / 1000) - 24 * 60 * 60;
+        date.setTime(beforeTime * 1000);
+
+        return formatter.format(date);
+    }
+
+    /**
+     * 获取一周前的日期(当前日期往前推7天)
+     *
+     * @param date
+     * @return
+     */
+    public static String getWeekdayBeforeDate(Date date) {
+        java.text.Format formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        long beforeTime = (date.getTime() / 1000) - 24 * 60 * 60 * 7;
+        date.setTime(beforeTime * 1000);
+
+        return formatter.format(date);
+    }
+
+    /**
      * 获取一个月之前的时间戳
      * @return unix 时间戳
      */
@@ -167,13 +285,152 @@ public class DateUtils {
         return getDayBegin(getCurrentTimeMillis()) - (86400000L *30);
     }
 
+    /**
+     * 获取一月前的日期(当前日期往前推30天)
+     *
+     * @param date
+     * @return
+     */
+    public static String getMonthBeforeDate(Date date) {
+        java.text.Format formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        long beforeTime = (date.getTime() / 1000) - 24 * 60 * 60 * 30;
+        date.setTime(beforeTime * 1000);
 
-    public static void main(String[] args) {
+        return formatter.format(date);
+    }
 
-        System.out.println(longTimeToString(14999990610451L));
+    /**
+     * 获取三月前的日期(当前日期往前推90天)
+     *
+     * @param date
+     * @return
+     */
+    public static String get3MonthBeforeDate(Date date) {
+        java.text.Format formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        long beforeTime = (date.getTime() / 1000) - 24 * 60 * 60 * 30 * 3;
+        date.setTime(beforeTime * 1000);
 
-        System.out.println(longTimeToString(1463705675664L, "HH:mm:ss yyyy-MM-dd"));
-        System.currentTimeMillis();
-        System.out.println(getCurrentTimeDate());
+        return formatter.format(date);
+    }
+
+    /**
+     * 获取一年后的日期
+     *
+     * @return
+     */
+    public static String getNextYear(int chooseYear, Date date) {
+        java.text.Format formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        long beforeTime = (date.getTime() / 1000) + 60 * 60 * 24 * 365 * chooseYear;
+        date.setTime(beforeTime * 1000);
+
+        return formatter.format(date);
+    }
+
+    /**
+     * 根据生日计算年龄
+     *
+     * @param birthDay
+     * @return
+     * @throws Exception
+     */
+    public static int getAge(Date birthDay) throws Exception {
+        Calendar cal = Calendar.getInstance();
+        if (cal.before(birthDay)) {
+            throw new IllegalArgumentException("The birthDay is before Now.It's unbelievable!");
+        }
+        int yearNow = cal.get(Calendar.YEAR);
+        int monthNow = cal.get(Calendar.MONTH);
+        int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
+        cal.setTime(birthDay);
+
+        int yearBirth = cal.get(Calendar.YEAR);
+        int monthBirth = cal.get(Calendar.MONTH);
+        int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
+
+        int age = yearNow - yearBirth;
+
+        if (monthNow <= monthBirth) {
+            if (monthNow == monthBirth) {
+                if (dayOfMonthNow < dayOfMonthBirth) {
+                    age--;
+                }
+            } else {
+                age--;
+            }
+        }
+
+        return age;
+    }
+
+    //获取指定年月的总天数
+    public static int getLastDay(int year, int month) {
+        int day = 1;
+        Calendar cal = Calendar.getInstance();
+        cal.set(year,month - 1,day);
+        int last = cal.getActualMaximum(Calendar.DATE);
+        return last;
+    }
+
+    //获取指定年月的日期
+    public static List<String> getDatesByMonth(int year, int month){
+        List<String> list=new ArrayList<String>();
+        String yyyy=year+"";
+        String mm=month+"";
+        String dd;
+        if(month<10){
+            mm="0"+month;
+        }
+        int num=getLastDay(year, month);
+        for(int i=1;i<=num;i++){
+            if(i<10){
+                dd="0"+i;
+            }else{
+                dd=i+"";
+            }
+            list.add(yyyy+"-"+mm+"-"+dd);
+        }
+        return list;
+    }
+
+    /**
+     * 检验时间格式
+     * @param str
+     * @param format "yyyy/MM/dd HH:mm:ss" "yyyy-MM-dd HH:mm:ss"
+     * @return
+     */
+    public static boolean isValidDate(String str, String format) {
+        boolean convertSuccess=true;
+        // 指定日期格式为四位年/两位月份/两位日期，注意yyyy/MM/dd区分大小写；
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("");
+        try {
+            // 设置lenient为false. 否则SimpleDateFormat会比较宽松地验证日期，比如2007/02/29会被接受，并转换成2007/03/01
+            simpleDateFormat.setLenient(false);
+            simpleDateFormat.parse(str);
+        } catch (ParseException e) {
+            convertSuccess=false;
+        }
+        return convertSuccess;
+    }
+
+    /**
+     * 测试
+     */
+    static class Tester {
+        public static void main(String[] args) {
+            System.out.println(longTimeToString(14999990610451L));
+
+            System.out.println(longTimeToString(1463705675664L, "HH:mm:ss yyyy-MM-dd"));
+            System.currentTimeMillis();
+            System.out.println(getCurrentTimeDate());
+
+            String dateStr = "2015-12-12 12:00:00";
+            String end = "2015-12-12 12:10:12";
+            long diff = diffDate(DIFF_SECOND, dateStr, end);
+            System.out.println(diff);
+
+
+            System.out.println(getYesterDay(new Date()));
+            System.out.println(getWeekdayBeforeDate(new Date()));
+        }
     }
 }

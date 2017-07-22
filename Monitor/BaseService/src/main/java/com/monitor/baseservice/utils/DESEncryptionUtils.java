@@ -13,6 +13,8 @@ import java.security.SecureRandom;
  */
 public class DESEncryptionUtils {
 
+    private DESEncryptionUtils() { }
+
     private final static String DES = "DES";
     private static final String key = "DE6K9MO7N";
 

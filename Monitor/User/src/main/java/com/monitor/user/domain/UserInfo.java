@@ -60,20 +60,20 @@ public class UserInfo implements Serializable {
     private Map<String, Object> exattr;
 
     /** 创建时间 */
-    @DateTimeFormat(pattern = DateUtils.DATE_FORMAT)
-    @JsonFormat(pattern = DateUtils.DATE_FORMAT)
+    @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
+    @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "ctime")
     private Timestamp ctime;
 
     /** 修改时间 */
-    @DateTimeFormat(pattern = DateUtils.DATE_FORMAT)
-    @JsonFormat(pattern = DateUtils.DATE_FORMAT)
+    @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
+    @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "mtime")
     private Timestamp mtime;
 
     /** 最后一次登录时间 */
-    @DateTimeFormat(pattern = DateUtils.DATE_FORMAT)
-    @JsonFormat(pattern = DateUtils.DATE_FORMAT)
+    @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
+    @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "last_time", nullable = false)
     private Timestamp last_time;
 

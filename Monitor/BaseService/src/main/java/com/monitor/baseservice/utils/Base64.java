@@ -11,6 +11,10 @@ import java.util.Arrays;
  * Created by yhe.abcft on 2017/6/27.
  */
 public class Base64 {
+
+    private Base64() {
+    }
+
     /**
      * Chunk size per RFC 2045 section 6.8.
      *
@@ -122,7 +126,7 @@ public class Base64 {
     }
 
     public static void main(String[] args) {
-        String decodestr = new String(decode("MTE2LjQ2Mzg0NzU1MDg0".getBytes()));
+        String decodestr = decode("MTE2LjQ2Mzg0NzU1MDg0".getBytes());
         System.out.println(decodestr);
     }
 
@@ -145,8 +149,8 @@ public class Base64 {
             // return false;
             return true;
         }
-        for (int i = 0; i < length; i++) {
-            if (!isBase64(arrayOctect[i])) {
+        for (byte anArrayOctect : arrayOctect) {
+            if (!isBase64(anArrayOctect)) {
                 return false;
             }
         }

@@ -27,14 +27,14 @@ public class TokenInfo implements Serializable {
     private Long uid;
 
     /** token的有效期限 */
-    @DateTimeFormat(pattern = DateUtils.DATE_FORMAT)
-    @JsonFormat(pattern = DateUtils.DATE_FORMAT)
+    @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
+    @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "expires")
     private Timestamp expires;
 
     /** 创建时间 */
-    @DateTimeFormat(pattern = DateUtils.DATE_FORMAT)
-    @JsonFormat(pattern = DateUtils.DATE_FORMAT)
+    @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
+    @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "ctime")
     private Timestamp ctime;
 

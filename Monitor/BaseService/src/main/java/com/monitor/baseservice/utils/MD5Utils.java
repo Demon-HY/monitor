@@ -7,7 +7,9 @@ import java.security.MessageDigest;
  *
  * Created by demon on 2017/7/1 0001.
  */
-public class MD5Util {
+public class MD5Utils {
+
+    private MD5Utils() { }
 
     /**
      * get data md5

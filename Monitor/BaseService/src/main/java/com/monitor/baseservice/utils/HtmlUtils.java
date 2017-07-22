@@ -16,6 +16,8 @@ import java.util.regex.Pattern;
  */
 public class HtmlUtils {
 
+    private HtmlUtils() { }
+
     private static Logger logger = Logger.getLogger(HtmlUtils.class);
 
     /**
@@ -56,7 +58,7 @@ public class HtmlUtils {
                 }
             }
         } catch (Exception e) {
-            logger.error("文章解析出错：",e);
+            logger.error("解析出错：",e);
         }
         return result;
     }
