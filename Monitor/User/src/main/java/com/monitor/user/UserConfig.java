@@ -23,9 +23,6 @@ public class UserConfig {
     @Autowired
     public Environment env; //当前环境的application.properties的 配置
 
-    @Value("${monitor.user.init.user}")
-    public String user;
-
     @Bean
     public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();

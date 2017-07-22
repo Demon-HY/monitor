@@ -6,8 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Map;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2017/7/16 0016.
@@ -20,7 +19,7 @@ public class UserInfo implements Serializable {
 
     /** 用户 Id */
     @Id
-    @GeneratedValue
+    @Column(name = "uid")
     private Long uid;
 
     /** 用户名,网页端注册的账号,同时会绑定邮箱 */
@@ -43,11 +42,7 @@ public class UserInfo implements Serializable {
     @Column(name = "password")
     private String password;
 
-    /** QQ 号 */
-    @Column(name = "qq", nullable = false)
-    private String qq;
-
-    /** 用户状态:1-正常,2-删除  */
+    /** 用户状态:0-正常,1-锁定，2-用户信息损坏，3-用户已删除 */
     @Column(name = "status", columnDefinition = "1")
     private Integer status;
 
@@ -57,26 +52,27 @@ public class UserInfo implements Serializable {
 
     /** 扩展属性集合 */
     @Column(name = "exattr", nullable = false)
-    private Map<String, Object> exattr;
+    private String exattr;
 
     /** 创建时间 */
     @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
     @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "ctime")
-    private Timestamp ctime;
+    private Date ctime;
 
     /** 修改时间 */
     @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
     @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "mtime")
-    private Timestamp mtime;
+    private Date mtime;
 
     /** 最后一次登录时间 */
     @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
     @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "last_time", nullable = false)
-    private Timestamp last_time;
+    private Date last_time;
 
+    @GeneratedValue(generator = "uid")
     public Long getUid() {
         return uid;
     }
@@ -101,10 +97,6 @@ public class UserInfo implements Serializable {
         return password;
     }
 
-    public String getQq() {
-        return qq;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -113,19 +105,19 @@ public class UserInfo implements Serializable {
         return type;
     }
 
-    public Map<String, Object> getExattr() {
+    public String getExattr() {
         return exattr;
     }
 
-    public Timestamp getCtime() {
+    public Date getCtime() {
         return ctime;
     }
 
-    public Timestamp getMtime() {
+    public Date getMtime() {
         return mtime;
     }
 
-    public Timestamp getLast_time() {
+    public Date getLast_time() {
         return last_time;
     }
 
@@ -153,10 +145,6 @@ public class UserInfo implements Serializable {
         this.password = password;
     }
 
-    public void setQq(String qq) {
-        this.qq = qq;
-    }
-
     public void setStatus(Integer status) {
         this.status = status;
     }
@@ -165,19 +153,19 @@ public class UserInfo implements Serializable {
         this.type = type;
     }
 
-    public void setExattr(Map<String, Object> exattr) {
+    public void setExattr(String exattr) {
         this.exattr = exattr;
     }
 
-    public void setCtime(Timestamp ctime) {
+    public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
 
-    public void setMtime(Timestamp mtime) {
+    public void setMtime(Date mtime) {
         this.mtime = mtime;
     }
 
-    public void setLast_time(Timestamp last_time) {
+    public void setLast_time(Date last_time) {
         this.last_time = last_time;
     }
 }

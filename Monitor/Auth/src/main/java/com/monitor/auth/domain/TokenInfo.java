@@ -20,6 +20,7 @@ public class TokenInfo implements Serializable {
     /** 用户登录凭据 */
     @Id
     @GeneratedValue
+    @Column(name = "token")
     private String token;
 
     /** 用户ID */

@@ -1,8 +1,6 @@
 package com.monitor.auth.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -15,6 +13,8 @@ public class LoginIdInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // 用户 ID
+    @Id
+    @GeneratedValue
     @Column(name = "uid")
     private Long uid;
 
