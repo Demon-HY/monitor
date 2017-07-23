@@ -4,8 +4,6 @@ import com.monitor.baseservice.common.db.ICommonMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * 映射SQL语句的接口，无逻辑实现
  *
@@ -15,5 +13,5 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends ICommonMapper<UserInfo> {
 
-    public List<UserInfo> findByParams(UserInfo userInfo);
+    public UserInfo findByName(String name);
 }

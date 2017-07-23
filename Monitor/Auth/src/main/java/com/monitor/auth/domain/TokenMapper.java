@@ -14,6 +14,4 @@ import java.util.List;
 @Repository
 @Mapper
 public interface TokenMapper extends ICommonMapper<TokenInfo> {
-
-    public List<TokenInfo> findByParams(TokenInfo tokenInfo);
 }

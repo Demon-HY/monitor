@@ -1,6 +1,10 @@
 package com.monitor.user.listener;
 
+import com.monitor.auth.LoginIdService;
+import com.monitor.baseservice.exception.LogicalException;
+import com.monitor.user.InitUser;
 import com.monitor.user.UserConfig;
+import com.monitor.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -16,6 +20,10 @@ public class PostOnApplicationListener implements ApplicationListener<Applicatio
 
     @Autowired
     UserConfig userConfig;
+    @Autowired
+    UserService userService;
+    @Autowired
+    LoginIdService loginIdService;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
@@ -27,7 +35,11 @@ public class PostOnApplicationListener implements ApplicationListener<Applicatio
         }
 
         // 初始化用户
-
-        System.out.println(userConfig.env.getProperty("monitor.user.init.admin.username"));
+        InitUser initUser = new InitUser();
+        try {
+            initUser.initUser(userConfig, userService, loginIdService);
+        } catch (LogicalException e) {
+            e.printStackTrace();
+        }
     }
 }

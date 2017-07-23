@@ -19,7 +19,6 @@ public class TokenInfo implements Serializable {
 
     /** 用户登录凭据 */
     @Id
-    @GeneratedValue
     @Column(name = "token")
     private String token;
 
@@ -47,6 +46,7 @@ public class TokenInfo implements Serializable {
     @Column(name = "device", nullable = false)
     private String device;
 
+    @GeneratedValue(generator = "token")
     public String getToken() {
         return token;
     }

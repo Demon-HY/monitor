@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
   `nick` varchar(64) DEFAULT NULL COMMENT '昵称',
   `password` varchar(255) NOT NULL COMMENT '密码',
-  `type` int(1) NOT NULL DEFAULT 0 COMMENT '状态',   /*0-正常，1-锁定，2-用户信息损坏，3-用户已删除*/
-  `status` int(1) NOT NULL DEFAULT 2 COMMENT '类型', /*用户类型:1-超级管理员,2-普通用户*/
+  `type` int(1) NOT NULL DEFAULT 1 COMMENT '类型', /*用户类型:1-超级管理员,2-普通用户*/
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '状态', /*0-正常，1-锁定，2-用户信息损坏，3-用户已删除*/
   `exattr` varchar(10240) DEFAULT  NULL COMMENT '扩展属性',
   `ctime` datetime NOT NULL COMMENT '创建时间',
   `mtime` datetime NOT NULL COMMENT '修改时间',

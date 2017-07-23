@@ -34,11 +34,11 @@ monitor:
       admin:
         username: admin
         password: P@ssw0rd
-        attrs: {'nick': '超级管理员','email':'heyan_kafeibuku@sina.com','status':1,'type':1}
+        attrs: "{'nick': '超级管理员','email':'heyan_kafeibuku@sina.com','status':1,'type':1}"
       test:
-        username: admin
+        username: test
         password: P@ssw0rd
-        attrs: {'nick': '普通用户','email':'156286821@qq.com','status':1,'type':1}
+        attrs: "{'nick': '普通用户','email':'156286821@qq.com','status':1,'type':2}"
 
 # logger
 logging:

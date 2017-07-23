@@ -14,7 +14,6 @@ public class LoginIdInfo implements Serializable {
 
     // 自增 ID
     @Id
-    @GeneratedValue
     @Column(name = "id")
     private Long id;
 
@@ -27,9 +26,18 @@ public class LoginIdInfo implements Serializable {
     private String type;
 
     // 用户登录名
-    @Column(name = "value")
-    private String value;
+    @Column(name = "name")
+    private String name;
 
+    public LoginIdInfo() {
+    }
+
+    public LoginIdInfo(String type, String name) {
+        this.type = type;
+        this.name = name;
+    }
+
+    @GeneratedValue(generator = "id")
     public Long getId() {
         return id;
     }
@@ -42,8 +50,8 @@ public class LoginIdInfo implements Serializable {
         return type;
     }
 
-    public String getValue() {
-        return value;
+    public String getName() {
+        return name;
     }
 
     public void setId(Long id) {
@@ -58,7 +66,7 @@ public class LoginIdInfo implements Serializable {
         this.type = type;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setName(String name) {
+        this.name = name;
     }
 }

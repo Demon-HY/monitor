@@ -14,6 +14,4 @@ import java.util.List;
 @Repository
 @Mapper
 public interface LoginIdMapper extends ICommonMapper<LoginIdInfo> {
-
-    public List<LoginIdInfo> findByParams(LoginIdInfo loginIdInfo);
 }

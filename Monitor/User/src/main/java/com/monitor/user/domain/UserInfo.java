@@ -42,8 +42,8 @@ public class UserInfo implements Serializable {
     @Column(name = "password")
     private String password;
 
-    /** 用户状态:0-正常,1-锁定，2-用户信息损坏，3-用户已删除 */
-    @Column(name = "status", columnDefinition = "1")
+    /** 用户状态:1-正常,2-锁定，3-用户信息损坏，4-用户已删除 */
+    @Column(name = "status", columnDefinition = "0")
     private Integer status;
 
     /** 用户类型:1-超级管理员,2-普通用户 */
@@ -71,6 +71,13 @@ public class UserInfo implements Serializable {
     @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "last_time", nullable = false)
     private Date last_time;
+
+    public UserInfo() {
+    }
+
+    public UserInfo(String name) {
+        this.name = name;
+    }
 
     @GeneratedValue(generator = "uid")
     public Long getUid() {

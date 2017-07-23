@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.monitor.auth.TokenMapper">
-    <resultMap id="TokenResultMap" type="com.monitor.auth.TokenInfo">
+    <resultMap id="TokenResultMap" type="com.monitor.auth.domain.TokenInfo">
             <id column="token"  property="token" />
             <result column="uid"  property="uid" />
             <result column="expires"  property="expires" />
@@ -29,7 +29,7 @@
         from token
     </select>
 
-    <select id="findByParams" resultMap="TokenResultMap" parameterType="com.monitor.auth.TokenInfo">
+    <select id="findByParams" resultMap="TokenResultMap" parameterType="com.monitor.auth.domain.TokenInfo">
         select
         <include refid="Base_Column_List" />
         from token
@@ -45,14 +45,14 @@
         where token = #{token}
     </delete>
 
-    <insert id="create" useGeneratedKeys="true" keyProperty="token" parameterType="com.monitor.auth.TokenInfo">
+    <insert id="create" useGeneratedKeys="true" keyProperty="token" parameterType="com.monitor.auth.domain.TokenInfo">
         insert into
         token (uid,expires,ctime,ip,device)
         values
         (#{uid},#{expires},#{ctime},#{ip},#{device})
     </insert>
 
-    <update id="update" parameterType="com.monitor.auth.TokenInfo">
+    <update id="update" parameterType="com.monitor.auth.domain.TokenInfo">
         update token
         <set>
                                                         

@@ -11,14 +11,13 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ * 用户模块配置信息
  *
  * Created by Administrator on 2017/7/15 0015.
  */
 @Component
 @Configuration
 public class UserConfig {
-
 
     @Autowired
     public Environment env; //当前环境的application.properties的 配置
@@ -31,6 +30,11 @@ public class UserConfig {
     @Bean
     public PostOnApplicationListener applicationStartListener(){
         return new PostOnApplicationListener();
+    }
+
+    @Bean
+    public InitUser initUser(){
+        return new InitUser();
     }
 
 //    public void outputResource(){
