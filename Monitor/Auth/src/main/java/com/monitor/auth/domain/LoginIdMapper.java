@@ -1,4 +1,4 @@
-package com.monitor.user.domain;
+package com.monitor.auth.domain;
 
 import com.monitor.baseservice.common.db.ICommonMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Repository
 @Mapper
-public interface UserMapper extends ICommonMapper<UserInfo> {
+public interface LoginIdMapper extends ICommonMapper<LoginIdInfo> {
 
-    public List<UserInfo> findByParams(UserInfo userInfo);
+    public List<LoginIdInfo> findByParams(LoginIdInfo loginIdInfo);
 }

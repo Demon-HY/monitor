@@ -26,7 +26,7 @@ public class MyBatisMapperScannerConfig {
         mapperScannerConfigurer.setBasePackage("com.monitor.**.domain");
         Properties properties = new Properties();
         // 这里要特别注意，不要把MyMapper放到 basePackage 中，也就是不能同其他Mapper一样被扫描到。
-        properties.setProperty("mappers", MyMapper.class.getName());
+        properties.setProperty("mappers", ICommonMapper.class.getName());
         properties.setProperty("notEmpty", "false");
         properties.setProperty("IDENTITY", "MYSQL");
         mapperScannerConfigurer.setProperties(properties);

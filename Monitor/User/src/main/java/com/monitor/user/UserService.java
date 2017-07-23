@@ -1,5 +1,6 @@
 package com.monitor.user;
 
+import com.monitor.user.domain.UserInfo;
 import com.monitor.user.domain.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,4 +13,9 @@ public class UserService {
 
     @Autowired
     UserMapper userMapper;
+
+    public void createUser(UserInfo userInfo) {
+
+    }
+
 }

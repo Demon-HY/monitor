@@ -12,9 +12,13 @@ public class LoginIdInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // 用户 ID
+    // 自增 ID
     @Id
     @GeneratedValue
+    @Column(name = "id")
+    private Long id;
+
+    // 用户 ID
     @Column(name = "uid")
     private Long uid;
 
@@ -26,6 +30,10 @@ public class LoginIdInfo implements Serializable {
     @Column(name = "value")
     private String value;
 
+    public Long getId() {
+        return id;
+    }
+
     public Long getUid() {
         return uid;
     }
@@ -36,6 +44,10 @@ public class LoginIdInfo implements Serializable {
 
     public String getValue() {
         return value;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setUid(Long uid) {

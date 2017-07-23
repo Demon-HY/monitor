@@ -42,10 +42,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- 这个表的作用主要是减少查询用户表的次数,然后就是对用户登录设备的限制
 CREATE TABLE IF NOT EXISTS `login_id` (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `uid` bigint(20) NOT NULL COMMENT '用户ID',
   `type` varchar(16) NOT NULL COMMENT '登录类型', /*type=[name,email,phone]*/
   `name` varchar(16) NOT NULL COMMENT '用户名',
 
+  PRIMARY KEY (`id`),
   UNIQUE KEY (`type`, `name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录表';
 

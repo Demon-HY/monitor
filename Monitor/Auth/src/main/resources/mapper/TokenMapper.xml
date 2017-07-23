@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monitor.auth.TokenMapper">
+    <resultMap id="TokenResultMap" type="com.monitor.auth.TokenInfo">
+            <id column="token"  property="token" />
+            <result column="uid"  property="uid" />
+            <result column="expires"  property="expires" />
+            <result column="ctime"  property="ctime" />
+            <result column="ip"  property="ip" />
+            <result column="device"  property="device" />
+        
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        token,uid,expires,ctime,ip,device
+    </sql>
+
+    <select id="findById" parameterType="java.lang.Integer" resultMap="TokenResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from token
+        where token = #{token}
+    </select>
+
+    <select id="findAll"  resultMap="TokenResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from token
+    </select>
+
+    <select id="findByParams" resultMap="TokenResultMap" parameterType="com.monitor.auth.TokenInfo">
+        select
+        <include refid="Base_Column_List" />
+        from token
+        <where>
+            <if test="token != null">
+                token = #{token}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from token
+        where token = #{token}
+    </delete>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="token" parameterType="com.monitor.auth.TokenInfo">
+        insert into
+        token (uid,expires,ctime,ip,device)
+        values
+        (#{uid},#{expires},#{ctime},#{ip},#{device})
+    </insert>
+
+    <update id="update" parameterType="com.monitor.auth.TokenInfo">
+        update token
+        <set>
+                                                        
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+                                            
+            <if test="expires != null">
+                expires = #{expires},
+            </if>
+                                            
+            <if test="ctime != null">
+                ctime = #{ctime},
+            </if>
+                                            
+            <if test="ip != null">
+                ip = #{ip},
+            </if>
+                                            
+            <if test="device != null">
+                device = #{device},
+            </if>
+                            
+        </set>
+        where token = #{token}
+    </update>
+</mapper>

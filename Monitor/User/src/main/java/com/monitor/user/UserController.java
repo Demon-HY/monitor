@@ -39,7 +39,7 @@ public class UserController {
         user.setMtime(new Date());
         user.setLast_time(new Date());
 
-        Integer result = userMapper.insert(user);
+        Integer result = userMapper.create(user);
 
         return result.toString();
     }
