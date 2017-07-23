@@ -35,6 +35,8 @@ public class Table {
     private String className;
     // 类名首字母小写
     private String classNameFirstLower;
+    // 主键字段名
+    private String primaryFieldName;
 
     /**
      * 获得第一个主键

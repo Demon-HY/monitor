@@ -1,4 +1,4 @@
-package ${table.packageName}.controller;
+package ${table.packageName}.${table.tableName};
 
 import java.io.IOException;
 
@@ -9,13 +9,14 @@ import org.unique.web.annotation.Action;
 import org.unique.plugin.dao.Page;
 import org.unique.web.annotation.Controller;
 
-
 /**
 * 控制器
 * @author ${author}
 * @since 1.0
 */
-@Controller
+@RestController
+@Auth
+@RequestMapping("/${table.tableName}/api")
 public class ${table.className}Controller {
 
     private Logger logger = Logger.getLogger(${table.className}Controller.class);

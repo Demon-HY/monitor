@@ -1,10 +1,9 @@
-package ${table.packageName}.service;
+package ${table.packageName}.${table.tableName};
 
 import com.github.pagehelper.PageInfo;
-import ${table.packageName}.dao.model.${table.className};
-import ${table.packageName}.dao.vo.${table.className}Vo;
+import ${table.packageName}.${table.tableName}.domain.${table.className}Info;
 
-public interface ${table.className}Service extends ICommonService<${table.className}>{
+@Service
+public interface ${table.className}Service {
 
-    public PageInfo<${table.className}Vo> findByParams(${table.className}Vo ${table.classNameFirstLower}Vo,Integer pageNum,Integer pageSize);
 }

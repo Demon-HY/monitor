@@ -1,33 +1,45 @@
 ##实体类代码
-package ${table.packageName}.dao.model;
+package ${table.packageName}.${table.tableName}.domain;
 
 import java.io.Serializable;
 
-
-
+/**
+* ${table.className} 实体类
+*/
+@Entity
+@Table(name = "${table.tableName}")
 public class ${table.className}  implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-#foreach( $tempColumn in $table.columnList)
-#if(${tempColumn.columnComment.trim()} != '')
-	//${tempColumn.columnComment.trim()}
-#end
-	private ${tempColumn.fieldType} ${tempColumn.fieldName};
-	
-#end
-	public ${table.className}(){}
-	
-#foreach( $tempColumn in $table.columnList )
-#if(${tempColumn.fieldType}=="Date")
-#end
-	public ${tempColumn.fieldType} ${tempColumn.fieldGetMethod}() {
-		return ${tempColumn.fieldName};
-	}
+    private static final long serialVersionUID = 1L;
 
-	public void ${tempColumn.fieldSetMehtod}(${tempColumn.fieldType} ${tempColumn.fieldName}) {
-		this.${tempColumn.fieldName} = ${tempColumn.fieldName};
-	}
-	
+#foreach( $tempColumn in $table.columnList)
+    #if(${tempColumn.columnComment.trim()} != '')
+    // ${tempColumn.columnComment.trim()}
+    #end
+    #if(${tempColumn.fieldType}=="Date")
+    @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
+    @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
+    #end
+    #if(${tempColumn.isNullAble} == true)
+    @Column(name = "${table.fieldName}")
+    #else
+    @Column(name = "${table.fieldName}, nullable = false")
+    #end
+    private ${tempColumn.fieldType} ${tempColumn.fieldName};
+
 #end
-}
+    public ${table.className}(){}
+
+    #foreach( $tempColumn in $table.columnList )
+        #if(${tempColumn.fieldType}=="Date")
+        #end
+    public ${tempColumn.fieldType} ${tempColumn.fieldGetMethod}() {
+        return ${tempColumn.fieldName};
+    }
+
+    public void ${tempColumn.fieldSetMehtod}(${tempColumn.fieldType} ${tempColumn.fieldName}) {
+        this.${tempColumn.fieldName} = ${tempColumn.fieldName};
+    }
+
+    #end
+    }

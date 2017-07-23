@@ -1,9 +1,10 @@
-package ${table.packageName}.dao;
+package ${table.packageName};
 
-import ${table.packageName}.dao.model.${table.className};
-import ${table.packageName}.dao.vo.${table.className}Vo;
+import ${table.packageName}.${table.classNameLower};
+import ${table.packageName}.${table.classNameLower}Vo;
 
 import java.util.List;
+
 @Mapper
 public interface ${table.className}Dao extends ICommonDao<${table.className}>{
 

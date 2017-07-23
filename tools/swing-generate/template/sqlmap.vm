@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${table.packageName}.dao.${table.className}Dao">
-    <resultMap id="${table.className}ResultMap" type="${table.packageName}.dao.model.${table.className}">
+<mapper namespace="${table.packageName}.${table.tableName}.${table.className}Mapper">
+    <resultMap id="${table.className}ResultMap" type="${table.packageName}.${table.tableName}.${table.className}Info">
     #foreach($tempColumn in $table.columnList)
     #if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
     <id column="${tempColumn.columnName}"  property="${tempColumn.fieldName}" />
@@ -12,9 +12,9 @@
 
     </resultMap>
 
-    <resultMap id="${table.className}ResultMapVo"  type="${table.packageName}.dao.vo.${table.className}Vo" extends="${table.className}ResultMap">
-
-    </resultMap>
+##    <resultMap id="${table.className}ResultMapVo"  type="${table.packageName}.dao.vo.${table.className}Vo" extends="${table.className}ResultMap">
+##
+##    </resultMap>
 
     <sql id="Base_Column_List">
         #foreach( $tempColumn in $table.columnList)${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()),#end#end
@@ -25,7 +25,7 @@
         select
         <include refid="Base_Column_List" />
         from ${table.tableName}
-        where id = #{id}
+        where ${table.getFirstPrimaryKey().fieldName} = #{${table.getFirstPrimaryKey().fieldName}}
     </select>
 
     <select id="findAll"  resultMap="${table.className}ResultMap">
@@ -34,30 +34,30 @@
         from ${table.tableName}
     </select>
 
-    <select id="findByParams" resultMap="${table.className}ResultMapVo" parameterType="${table.packageName}.dao.vo.${table.className}Vo">
+    <select id="findByParams" resultMap="${table.className}ResultMap" parameterType="${table.packageName}.${table.tableName}.${table.className}Info">
         select
         <include refid="Base_Column_List" />
         from ${table.tableName}
         <where>
-            <if test="id != null">
-                id = #{id}
+            <if test="${table.getFirstPrimaryKey().fieldName} != null">
+                ${table.getFirstPrimaryKey().fieldName} = #{${table.getFirstPrimaryKey().fieldName}}
             </if>
         </where>
     </select>
 
     <delete id="deleteById" parameterType="java.lang.Integer">
         delete from ${table.tableName}
-        where id = #{id}
+        where ${table.getFirstPrimaryKey().fieldName} = #{${table.getFirstPrimaryKey().fieldName}}
     </delete>
 
-    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="${table.packageName}.dao.model.${table.className}">
+    <insert id="create" useGeneratedKeys="true" keyProperty="${table.getFirstPrimaryKey().fieldName}" parameterType="${table.packageName}.${table.tableName}.${table.className}Info">
         insert into
         ${table.tableName} (#foreach( $tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()),#end#end#end)
         values
         (#foreach( $tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})#{${tempColumn.fieldName}}#if($velocityCount!=$table.columnList.size()),#end#end#end)
     </insert>
 
-    <update id="update" parameterType="${table.packageName}.dao.model.${table.className}">
+    <update id="update" parameterType="${table.packageName}.${table.tableName}.${table.className}Info">
         update ${table.tableName}
         <set>
             #foreach($tempColumn in $table.columnList)
@@ -70,6 +70,6 @@
             #end
 
         </set>
-        where id = #{id}
+        where ${table.getFirstPrimaryKey().fieldName} = #{${table.getFirstPrimaryKey().fieldName}}
     </update>
 </mapper>

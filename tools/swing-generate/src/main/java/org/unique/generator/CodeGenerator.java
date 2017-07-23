@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.unique.generator.model.Column;
 import org.unique.generator.model.Database;
 import org.unique.generator.model.Table;
 
@@ -76,17 +77,16 @@ public class CodeGenerator {
                 table.setPackageName(classPackage);
 
                 Map<String, Object> map = new HashMap<String, Object>();
-
                 map.put("table", table);
                 map.put("author", author);
 
-                VelocityInfoOp.generatorCode("model.vm", map, sourcePath + table.getPackagePath() + "/model", table.getClassName() + ".java");
-                VelocityInfoOp.generatorCode("modelVo.vm", map, sourcePath + table.getPackagePath() + "/vo", table.getClassName() + "Vo.java");
-                VelocityInfoOp.generatorCode("service.vm", map, sourcePath + table.getPackagePath() + "/service", table.getClassName() + "Service.java");
-                VelocityInfoOp.generatorCode("serviceImpl.vm", map, sourcePath + table.getPackagePath() + "/service/impl", table.getClassName() + "ServiceImpl.java");
-//              VelocityInfoOp.generatorCode("controller.vm", map, sourcePath + table.getPackagePath() + "/controller", table.getClassName() + "Controller.java");
+                VelocityInfoOp.generatorCode("controller.vm", map, sourcePath + table.getPackagePath() + "/" + table.getTableName(), table.getClassName() + "Controller.java");
+                VelocityInfoOp.generatorCode("service.vm", map, sourcePath + table.getPackagePath() + "/" + table.getTableName(), table.getClassName() + "Service.java");
+                VelocityInfoOp.generatorCode("model.vm", map, sourcePath + table.getPackagePath() + "/" + table.getTableName() + "/domain", table.getClassName() + "Info.java");
+                VelocityInfoOp.generatorCode("mapper.vm", map, sourcePath + table.getPackagePath() + "/" + table.getTableName() + "/domain", table.getClassName() + "Mapper.java");
                 VelocityInfoOp.generatorCode("sqlmap.vm", map, sourcePath + table.getPackagePath() + "/mapper", table.getClassName() + "Mapper.xml");
-                VelocityInfoOp.generatorCode("dao.vm", map, sourcePath + table.getPackagePath() + "/dao", table.getClassName() + "Dao.java");
+//                VelocityInfoOp.generatorCode("serviceImpl.vm", map, sourcePath + table.getPackagePath() + "/service/impl", table.getClassName() + "ServiceImpl.java");
+//                VelocityInfoOp.generatorCode("dao.vm", map, sourcePath + table.getPackagePath() + "/dao", table.getClassName() + "Dao.java");
 //              VelocityInfoOp.generatorCode("daoimpl.vm", map, sourcePath + table.getPackagePath() + "/dao/impl", table.getClassName() + "DaoImpl.java");
 
                 logger.info("表：" + table.getTableName() + "成功");
