@@ -6,10 +6,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
- * Created by Administrator on 2017/7/15 0015.
+ * 用户登录认证信息实体类
+ *
+ * Created by Demon on 2017/7/15 0015.
  */
 @Entity
 @Table(name = "token")
@@ -30,13 +32,13 @@ public class TokenInfo implements Serializable {
     @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
     @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "expires")
-    private Timestamp expires;
+    private Date expires;
 
     /** 创建时间 */
     @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
     @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
     @Column(name = "ctime")
-    private Timestamp ctime;
+    private Date ctime;
 
     /** 客户端IP */
     @Column(name = "ip", nullable = false)
@@ -45,6 +47,13 @@ public class TokenInfo implements Serializable {
     /** 客户端设备 */
     @Column(name = "device", nullable = false)
     private String device;
+
+    public TokenInfo() {
+    }
+
+    public TokenInfo(String token) {
+        this.token = token;
+    }
 
     @GeneratedValue(generator = "token")
     public String getToken() {
@@ -55,11 +64,11 @@ public class TokenInfo implements Serializable {
         return uid;
     }
 
-    public Timestamp getExpires() {
+    public Date getExpires() {
         return expires;
     }
 
-    public Timestamp getCtime() {
+    public Date getCtime() {
         return ctime;
     }
 
@@ -79,11 +88,11 @@ public class TokenInfo implements Serializable {
         this.uid = uid;
     }
 
-    public void setExpires(Timestamp expires) {
+    public void setExpires(Date expires) {
         this.expires = expires;
     }
 
-    public void setCtime(Timestamp ctime) {
+    public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
 

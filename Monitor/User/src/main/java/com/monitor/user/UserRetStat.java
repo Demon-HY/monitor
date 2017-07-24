@@ -5,7 +5,7 @@ import com.monitor.baseservice.status.RetStat;
 /**
  * 用户模块错误码
  *
- * Created by Administrator on 2017/7/23 0023.
+ * Created by Demon on 2017/7/23 0023.
  */
 public class UserRetStat extends RetStat {
 
@@ -51,6 +51,8 @@ public class UserRetStat extends RetStat {
     public static final String ERR_USER_LOCKED = "ERR_USER_LOCKED";
     /** 错误码：创建用户失败 */
     public static final String ERR_CREATE_USER_FAILED = "ERR_CREATE_USER_FAILED";
+    /** 错误码：创建用户失败 */
+    public static final String ERR_UPDATE_USER_FAILED = "ERR_UPDATE_USER_FAILED";
 
     public static String getMsgByStat(String stat, Object... params) {
 //        // 先去查找基础错误码
@@ -74,6 +76,7 @@ public class UserRetStat extends RetStat {
             case ERR_ILLEGAL_PHONE_ACCOUNT: return String.format("非法手机号 %s", params);
             case ERR_USER_LOCKED : return String.format("用户 %s 已被锁定", params);
             case ERR_CREATE_USER_FAILED : return String.format("创建用户 %s 失败", params);
+            case ERR_UPDATE_USER_FAILED : return String.format("更新用户 %s 失败", params);
             case ERR_PHONE_ALREADY_BOUND : return String.format("手机号 %s 已被绑定", params);
             case ERR_ILLEGAL_PASSWORD : return String.format("无效密码: %s", params);
             default : return null;

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 /**
  * 用户模块配置信息
  *
- * Created by Administrator on 2017/7/15 0015.
+ * Created by Demon on 2017/7/15 0015.
  */
 @Component
 @Configuration
@@ -30,11 +30,6 @@ public class UserConfig {
     @Bean
     public PostOnApplicationListener applicationStartListener(){
         return new PostOnApplicationListener();
-    }
-
-    @Bean
-    public InitUser initUser(){
-        return new InitUser();
     }
 
 //    public void outputResource(){

@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by Administrator on 2017/7/16 0016.
+ * Created by Demon on 2017/7/16 0016.
  */
 @Entity
 @Table(name = "user")

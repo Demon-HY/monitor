@@ -12,7 +12,7 @@ import java.util.Locale;
 /**
  * 数字工具类，包含Java代码中的工具
  *
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 public class NumberUtils {
 

@@ -1,4 +1,9 @@
 
+-- 创建权限用户
+-- CREATE USER 'monitor'@'%' IDENTIFIED BY 'monitor';
+-- 授权
+-- GRANT ALL ON *.* TO 'monitor'@'%';
+
 CREATE DATABASE IF NOT EXISTS `monitor`  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 USE monitor;

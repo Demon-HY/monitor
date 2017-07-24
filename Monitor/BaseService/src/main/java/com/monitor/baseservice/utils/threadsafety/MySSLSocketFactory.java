@@ -19,7 +19,7 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 /**
  * SSL全部信任登录
  *
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 public class MySSLSocketFactory extends SSLSocketFactory {
 

@@ -1,5 +1,6 @@
 package com.monitor.baseservice.exception;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ import java.util.Map;
  * @author monitor
  *
  */
-public class LogicalException extends Exception {
+public class LogicalException extends Exception implements Serializable {
     
     private static final long serialVersionUID = -2247331292377127222L;
     
@@ -20,7 +21,7 @@ public class LogicalException extends Exception {
         super(stat + "\t" + errMsg);
         this.stat = stat;
         this.errMsg = errMsg;
-        reaultMap = new HashMap<String, Object>();
+        reaultMap = new HashMap<>();
     }
     
 }

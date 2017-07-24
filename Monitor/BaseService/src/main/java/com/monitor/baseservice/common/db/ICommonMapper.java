@@ -3,7 +3,7 @@ package com.monitor.baseservice.common.db;
 /**
  * 所有的 Mapper 继承它，里面定义了一些通用的方法
  *
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 
 import tk.mybatis.mapper.common.*;

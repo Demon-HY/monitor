@@ -12,7 +12,7 @@ import tk.mybatis.spring.mapper.MapperScannerConfigurer;
  * MyBatis扫描接口，使用的tk.mybatis.spring.mapper.MapperScannerConfigurer <br/>
  * 如果你不使用通用Mapper，可以改为org.xxx...
  *
- * Created by Administrator on 2017/7/23 0023.
+ * Created by Demon on 2017/7/23 0023.
  */
 @Configuration
 //TODO 注意，由于MapperScannerConfigurer执行的比较早，所以必须有下面的注解

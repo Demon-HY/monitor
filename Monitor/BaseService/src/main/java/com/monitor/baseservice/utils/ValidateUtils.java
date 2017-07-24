@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /**
  * 有效验证
  *
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 public class ValidateUtils {
 

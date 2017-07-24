@@ -20,7 +20,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 /**
  * 编码工具类
  *
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 public final class EncodeUtil {
 

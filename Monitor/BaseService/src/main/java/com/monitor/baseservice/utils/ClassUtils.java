@@ -15,7 +15,7 @@ import java.net.URL;
  *
  * 3.类都有final修饰
  *
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 public class ClassUtils {
 

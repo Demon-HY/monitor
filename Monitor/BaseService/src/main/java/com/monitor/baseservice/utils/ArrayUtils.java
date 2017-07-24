@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 /**
  * 数组类型工具类
  * <p/>
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 public class ArrayUtils {
 

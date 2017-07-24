@@ -18,12 +18,9 @@ public class PostOnApplicationListener implements ApplicationListener<Applicatio
 
     public PostOnApplicationListener() {}
 
+
     @Autowired
-    UserConfig userConfig;
-    @Autowired
-    UserService userService;
-    @Autowired
-    LoginIdService loginIdService;
+    InitUser initUser;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
@@ -34,10 +31,9 @@ public class PostOnApplicationListener implements ApplicationListener<Applicatio
             return;
         }
 
-        // 初始化用户
-        InitUser initUser = new InitUser();
         try {
-            initUser.initUser(userConfig, userService, loginIdService);
+            // 初始化用户
+            initUser.initUser();
         } catch (LogicalException e) {
             e.printStackTrace();
         }

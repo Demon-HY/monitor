@@ -25,7 +25,7 @@ import org.apache.http.protocol.HTTP;
  * 线程安全的 HttpCLient,单例模式，支持http、https协议
  *
  * 依赖：com.monitor.baseservice.utils.httpclient.MySSLSocketFactory.java
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 public class CustomHttpClient {
 

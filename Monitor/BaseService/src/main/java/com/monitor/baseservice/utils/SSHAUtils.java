@@ -12,7 +12,7 @@ import org.apache.commons.codec.binary.Base64;
 /**
  * SSHA 加密
  *
- * Created by Administrator on 2017/7/23 0023.
+ * Created by Demon on 2017/7/23 0023.
  */
 public class SSHAUtils {
 

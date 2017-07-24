@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 /**
  * 实例操作工具类
  * <p/>
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 public class BeanUtils {
 

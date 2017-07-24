@@ -1,5 +1,6 @@
 package com.monitor.user;
 
+import com.google.gson.Gson;
 import com.monitor.auth.domain.LoginIdInfo;
 import com.monitor.auth.domain.LoginIdMapper;
 import com.monitor.baseservice.exception.LogicalException;
@@ -9,6 +10,8 @@ import com.monitor.user.domain.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +19,7 @@ import java.util.List;
 /**
  * 用户逻辑处理类
  *
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 @Service
 public class UserService {
@@ -69,6 +72,8 @@ public class UserService {
                         loginIdInfo.setName(user.getName());
                 }
                 result = loginIdMapper.insert(loginIdInfo);
+                userInfo.setPassword("");
+                logger.info("Create user success.UserInfo=" + new Gson().toJson(userInfo));
             }
         } catch (Exception e) {
             logger.error("Create user failed.", e);
@@ -97,8 +102,16 @@ public class UserService {
      * 更新用户
      * @param userInfo
      */
-    public void updateUser(UserInfo userInfo) {
-        userMapper.updateByPrimaryKey(userInfo);
+    public void updateUser(UserInfo userInfo) throws LogicalException {
+        try {
+            userMapper.updateByPrimaryKey(userInfo);
+            userInfo.setPassword("");
+            logger.info("Update user success.UserInfo=" + new Gson().toJson(userInfo));
+        } catch (Exception e) {
+            logger.error("Update user failed.", e);
+            throw new LogicalException(UserRetStat.ERR_UPDATE_USER_FAILED,
+                    UserRetStat.getMsgByStat(UserRetStat.ERR_UPDATE_USER_FAILED, userInfo.getName()));
+        }
     }
 
     public UserInfo selectOne(String name) {

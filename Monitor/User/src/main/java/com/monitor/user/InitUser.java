@@ -5,19 +5,32 @@ import com.monitor.auth.LoginIdService;
 import com.monitor.auth.domain.LoginIdInfo;
 import com.monitor.baseservice.exception.LogicalException;
 import com.monitor.user.domain.UserInfo;
+import com.monitor.user.domain.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 /**
- * 用户初始化
+ * 用户初始化,在程序启动时执行
  *
- * Created by Administrator on 2017/7/15 0015.
+ * Created by Demon on 2017/7/15 0015.
  */
 @Service
 public class InitUser {
 
-    public void initUser(UserConfig userConfig, UserService userService, LoginIdService loginIdService) throws LogicalException {
+    @Autowired
+    UserConfig userConfig;
+    @Autowired
+    UserService userService;
+    @Autowired
+    LoginIdService loginIdService;
+
+    /**
+     * 初始化用户，每次重启都会创建或更新配置中指定的用户
+     * @throws LogicalException
+     */
+    public void initUser() throws LogicalException {
         String _userNames = userConfig.env.getProperty("monitor.user.init.name");
         String[] names = _userNames.split(",");
         for (String name : names) {

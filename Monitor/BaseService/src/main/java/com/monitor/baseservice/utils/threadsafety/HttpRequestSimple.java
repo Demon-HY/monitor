@@ -28,7 +28,7 @@ import org.apache.log4j.Logger;
 /**
  * 线程安全的 HTTP 请求
  *
- * Created by Administrator on 2017/7/22 0022.
+ * Created by Demon on 2017/7/22 0022.
  */
 public class HttpRequestSimple {
 

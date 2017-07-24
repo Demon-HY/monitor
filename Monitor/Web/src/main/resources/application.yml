@@ -43,7 +43,7 @@ monitor:
 # logger
 logging:
   level:
-    tk.mybatis: DEBUG
+    com.monitor: DEBUG
 
 # mybatis
 mybatis:

@@ -1,5 +1,6 @@
 package com.monitor.common.exception;
 
+import com.monitor.baseservice.exception.LogicalException;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,10 +20,15 @@ public class GlobalException {
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(Exception e, HttpServletRequest request) throws Exception {
-        logger.info("请求地址：" + request.getRequestURL());
+        logger.error("请求地址：" + request.getRequestURL());
         ModelAndView mav = new ModelAndView();
         logger.error("异常信息：",e);
         mav.setViewName(DEFAULT_ERROR_VIEW);
         return mav;
+    }
+
+    @ExceptionHandler(value = LogicalException.class)
+    public LogicalException LogicalErrorHandler(LogicalException e, HttpServletRequest request) throws Exception {
+        return e;
     }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by Administrator on 2017/7/15 0015.
+ * Created by Demon on 2017/7/15 0015.
  */
 @Entity
 @Table(name = "login_id")
