@@ -2,9 +2,11 @@ package com.monitor.auth;
 
 import com.monitor.auth.domain.TokenInfo;
 import com.monitor.baseservice.common.aop.LoggerManage;
+import com.monitor.baseservice.common.bean.Result;
 import com.monitor.baseservice.common.interceptor.Auth;
 import com.monitor.baseservice.utils.CookieUtils;
 import com.monitor.baseservice.utils.DateUtils;
+import com.monitor.user.UserRetStat;
 import com.monitor.user.domain.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -91,10 +93,13 @@ public class AuthController {
      */
     @RequestMapping("/api/login")
     @LoggerManage(description="登录")
-    public UserInfo login(String account, String password, String type, Long tokenAge, String isCookie) {
+    public Result login(String account, String password, String type, Long tokenAge, String isCookie) {
         isCookie = null == isCookie ? "yes" : isCookie;
 
-
+        // 非法账号类型
+        if (!type.equals("name") && !type.equals("email") && !type.equals("phone")) {
+            return Result.error().msg(UserRetStat.getMsgByStat(UserRetStat.ERR_ILLEGAL_ACCOUNT_TYPE));
+        }
 
 
 

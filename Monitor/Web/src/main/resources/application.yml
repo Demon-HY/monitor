@@ -9,9 +9,14 @@ spring:
     encoding.enable: true
     encoding.force: true
   server:
-    port: 8080
+    port: 8888
     address: 127.0.0.1
     session-timeout: 60
+
+#  # static
+#  devtools:
+#    livereload:
+#      enabled: true
 
   # mysql
   datasource:
@@ -25,7 +30,7 @@ spring:
 
 monitor:
   base:
-    path: http://127.0.0.1:8080/
+    path: http://127.0.0.1:8888/monitor/
 
   # user module
   user:

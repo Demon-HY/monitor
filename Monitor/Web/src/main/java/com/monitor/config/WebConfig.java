@@ -4,10 +4,13 @@ import com.monitor.baseservice.common.interceptor.LoginInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  *
@@ -24,18 +27,18 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Autowired
     LoginInterceptor loginInterceptor;
 
-//    /**
-//     * 视图处理器
-//     * @return
-//     */
-//    @Bean
-//    public ViewResolver viewResolver() {
-//        logger.info("ViewResolver");
-//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-//        viewResolver.setPrefix("/templates/");
-//        viewResolver.setSuffix(".html");
-//        return viewResolver;
-//    }
+    /**
+     * 视图处理器
+     * @return
+     */
+    @Bean
+    public ViewResolver viewResolver() {
+        logger.info("ViewResolver");
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/templates/");
+        viewResolver.setSuffix(".html");
+        return viewResolver;
+    }
 
     /**
      * 拦截器配置
@@ -46,7 +49,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         // 注册监控拦截器
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/static/");
+                .excludePathPatterns("/statics/");
     }
 
     /**
@@ -56,8 +59,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         logger.info("addResourceHandlers");
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/statics/**")
+                .addResourceLocations("classpath:/templates/statics/");
+        registry.addResourceHandler("/modules/**")
+                .addResourceLocations("classpath:/templates/modules/");
+        registry.addResourceHandler("/locales/**")
+                .addResourceLocations("classpath:/templates/locales/");
     }
 
     @Override

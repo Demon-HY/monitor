@@ -18,7 +18,7 @@ public class WebController {
 
     @RequestMapping(value="/")
     public String index(){
-        return "index";
+        return "console";
     }
 
     @RequestMapping("/login")
@@ -31,10 +31,10 @@ public class WebController {
         return "index";
     }
 
-    @RequestMapping(value="/register")
-    public String register(Model model){
-        return "register";
-    }
+//    @RequestMapping(value="/register")
+//    public String register(Model model){
+//        return "register";
+//    }
 
     @RequestMapping(value="/test")
     public String test(Model model){

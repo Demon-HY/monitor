@@ -1,7 +1,7 @@
 package com.monitor.auth.listener;
 
+import com.monitor.auth.InitUser;
 import com.monitor.baseservice.exception.LogicalException;
-import com.monitor.user.InitUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;

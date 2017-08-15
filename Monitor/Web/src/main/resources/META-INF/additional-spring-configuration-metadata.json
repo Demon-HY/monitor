@@ -9,4 +9,6 @@
       "name": "monitor.datasource.user.init.admin.attrs.nick",
       "type": "java.lang.String",
       "description": "Description for monitor.datasource.user.init.admin.attrs.nick."
-    } }
+    }
+  ]
+}
