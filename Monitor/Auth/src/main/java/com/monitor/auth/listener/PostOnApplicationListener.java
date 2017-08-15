@@ -1,10 +1,7 @@
-package com.monitor.user.listener;
+package com.monitor.auth.listener;
 
-import com.monitor.auth.LoginIdService;
 import com.monitor.baseservice.exception.LogicalException;
 import com.monitor.user.InitUser;
-import com.monitor.user.UserConfig;
-import com.monitor.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -17,7 +14,6 @@ import org.springframework.context.ApplicationListener;
 public class PostOnApplicationListener implements ApplicationListener<ApplicationReadyEvent> {
 
     public PostOnApplicationListener() {}
-
 
     @Autowired
     InitUser initUser;

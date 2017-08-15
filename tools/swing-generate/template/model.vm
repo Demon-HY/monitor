@@ -8,7 +8,7 @@ import java.io.Serializable;
 */
 @Entity
 @Table(name = "${table.tableName}")
-public class ${table.className}  implements Serializable {
+public class ${table.className}Info  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,21 +17,22 @@ public class ${table.className}  implements Serializable {
     // ${tempColumn.columnComment.trim()}
     #end
     #if(${tempColumn.fieldType}=="Date")
-    @DateTimeFormat(pattern = DateUtils.GENERAL_PATTERN)
-    @JsonFormat(pattern = DateUtils.GENERAL_PATTERN)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     #end
-    #if(${tempColumn.isNullAble} == true)
-    @Column(name = "${table.fieldName}")
-    #else
-    @Column(name = "${table.fieldName}, nullable = false")
-    #end
+
     private ${tempColumn.fieldType} ${tempColumn.fieldName};
 
 #end
-    public ${table.className}(){}
+    public ${table.className}Info(){}
 
     #foreach( $tempColumn in $table.columnList )
         #if(${tempColumn.fieldType}=="Date")
+        #end
+        #if(${tempColumn.isNullAble} == true)
+        @Column(name = "${tempColumn.fieldName}")
+        #else
+        @Column(name = "${tempColumn.fieldName}", nullable = false)
         #end
     public ${tempColumn.fieldType} ${tempColumn.fieldGetMethod}() {
         return ${tempColumn.fieldName};

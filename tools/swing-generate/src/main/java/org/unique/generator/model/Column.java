@@ -114,8 +114,8 @@ public class Column {
 
     public String getFieldName() {
         // 驼峰命名法
-        this.fieldName = StringUtil.getClassLower(StringUtil.getDomainColumnName(this.columnName));
-//        this.fieldName = this.columnName;
+//        this.fieldName = StringUtil.getClassLower(StringUtil.getDomainColumnName(this.columnName));
+        this.fieldName = this.columnName;
         return fieldName;
     }
 

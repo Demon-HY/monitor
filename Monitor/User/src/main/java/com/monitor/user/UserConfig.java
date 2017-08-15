@@ -1,6 +1,5 @@
 package com.monitor.user;
 
-import com.monitor.user.listener.PostOnApplicationListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -27,10 +26,10 @@ public class UserConfig {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
-    @Bean
-    public PostOnApplicationListener applicationStartListener(){
-        return new PostOnApplicationListener();
-    }
+//    @Bean
+//    public PostOnApplicationListener applicationStartListener(){
+//        return new PostOnApplicationListener();
+//    }
 
 //    public void outputResource(){
 //        try {

@@ -1,8 +1,6 @@
 package com.monitor.user;
 
 import com.google.gson.Gson;
-import com.monitor.auth.domain.LoginIdInfo;
-import com.monitor.auth.domain.LoginIdMapper;
 import com.monitor.baseservice.exception.LogicalException;
 import com.monitor.baseservice.utils.SSHAUtils;
 import com.monitor.user.domain.UserInfo;
@@ -10,11 +8,7 @@ import com.monitor.user.domain.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.GsonJsonParser;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * 用户逻辑处理类
@@ -28,13 +22,11 @@ public class UserService {
 
     @Autowired
     UserMapper userMapper;
-    @Autowired
-    LoginIdMapper loginIdMapper;
 
     /**
      * 创建用户
      * @param userInfo
-     * @param type 用户类型，有：name/email/phone
+     * @param type 用户类型：name/email/phone
      * @return
      */
     public int createUser(UserInfo userInfo, String type) throws LogicalException {
@@ -55,23 +47,23 @@ public class UserService {
             if (result == 1) {
                 UserInfo user = selectOne(userInfo.getName());
 
-                LoginIdInfo loginIdInfo = new LoginIdInfo();
-                loginIdInfo.setUid(user.getUid());
-                loginIdInfo.setType(type);
-                switch (type) {
-                    case "name":
-                        loginIdInfo.setName(user.getName());
-                        break;
-                    case "email":
-                        loginIdInfo.setName(user.getEmail());
-                        break;
-                    case "phone":
-                        loginIdInfo.setName(user.getPhone());
-                        break;
-                    default:
-                        loginIdInfo.setName(user.getName());
-                }
-                result = loginIdMapper.insert(loginIdInfo);
+//                LoginIdInfo loginIdInfo = new LoginIdInfo();
+//                loginIdInfo.setUid(user.getUid());
+//                loginIdInfo.setType(type);
+//                switch (type) {
+//                    case "name":
+//                        loginIdInfo.setName(user.getName());
+//                        break;
+//                    case "email":
+//                        loginIdInfo.setName(user.getEmail());
+//                        break;
+//                    case "phone":
+//                        loginIdInfo.setName(user.getPhone());
+//                        break;
+//                    default:
+//                        loginIdInfo.setName(user.getName());
+//                }
+//                result = loginIdMapper.insert(loginIdInfo);
                 userInfo.setPassword("");
                 logger.info("Create user success.UserInfo=" + new Gson().toJson(userInfo));
             }

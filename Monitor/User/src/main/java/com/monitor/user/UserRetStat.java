@@ -2,6 +2,8 @@ package com.monitor.user;
 
 import com.monitor.baseservice.status.RetStat;
 
+import java.util.Date;
+
 /**
  * 用户模块错误码
  *
@@ -81,5 +83,9 @@ public class UserRetStat extends RetStat {
             case ERR_ILLEGAL_PASSWORD : return String.format("无效密码: %s", params);
             default : return null;
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Date().getTime());
     }
 }
