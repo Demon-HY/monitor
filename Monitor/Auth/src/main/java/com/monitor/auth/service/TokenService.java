@@ -1,7 +1,7 @@
-package com.monitor.auth;
+package com.monitor.auth.service;
 
 import com.monitor.auth.domain.TokenInfo;
-import com.monitor.auth.domain.TokenMapper;
+import com.monitor.auth.dao.TokenMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
-package com.monitor.auth;
+package com.monitor.auth.service;
 
 import com.monitor.auth.domain.LoginIdInfo;
-import com.monitor.auth.domain.LoginIdMapper;
+import com.monitor.auth.dao.LoginIdMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

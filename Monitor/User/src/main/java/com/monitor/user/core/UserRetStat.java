@@ -1,4 +1,4 @@
-package com.monitor.user;
+package com.monitor.user.core;
 
 import com.monitor.baseservice.status.RetStat;
 

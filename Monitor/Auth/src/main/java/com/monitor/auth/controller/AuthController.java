@@ -1,17 +1,21 @@
-package com.monitor.auth;
+package com.monitor.auth.controller;
 
+import com.monitor.auth.core.AuthUtils;
+import com.monitor.auth.service.AuthService;
+import com.monitor.auth.service.TokenService;
 import com.monitor.auth.domain.TokenInfo;
 import com.monitor.baseservice.common.aop.LoggerManage;
 import com.monitor.baseservice.common.bean.Result;
 import com.monitor.baseservice.common.interceptor.Auth;
 import com.monitor.baseservice.utils.CookieUtils;
 import com.monitor.baseservice.utils.DateUtils;
-import com.monitor.user.UserRetStat;
+import com.monitor.user.core.UserRetStat;
 import com.monitor.user.domain.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +28,13 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @Auth
 @RequestMapping("/auth")
+@SessionAttributes({ "userInfo" })
 public class AuthController {
 
     @Autowired
-    private LoginIdService loginIdService;
+    TokenService tokenService;
     @Autowired
-    private TokenService tokenService;
+    AuthService authService;
 
     /**
      * 验证登录
@@ -92,18 +97,25 @@ public class AuthController {
      * @return UserInfo
      */
     @RequestMapping("/api/login")
-    @LoggerManage(description="登录")
-    public Result login(String account, String password, String type, Long tokenAge, String isCookie) {
-        isCookie = null == isCookie ? "yes" : isCookie;
+    @Auth(continueCheck = false)
+    @ResponseBody
+    public Result login(HttpServletRequest request,
+            String account, String password, String type)
+            throws Exception {
+//        isCookie = null == isCookie ? "yes" : isCookie;
+
+        System.out.println(request.getParameter("type"));
 
         // 非法账号类型
         if (!type.equals("name") && !type.equals("email") && !type.equals("phone")) {
             return Result.error().msg(UserRetStat.getMsgByStat(UserRetStat.ERR_ILLEGAL_ACCOUNT_TYPE));
         }
 
+        AuthUtils.checkAccount(type, account);
 
+        UserInfo userInfo = authService.login(account, password, type);
 
-
+        request.getSession().setAttribute("userInfo", userInfo);
 
         return null;
     }

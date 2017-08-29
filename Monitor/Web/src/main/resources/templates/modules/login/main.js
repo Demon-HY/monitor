@@ -3,6 +3,7 @@ define(function(require, exports, module) {
     var request = util.getRequest();
     // 前端配置文件
     var config = require("config");
+
     // 登录页插件
     var plugins = config.plugins.login;
     $.each(plugins, function(i, v) {
@@ -47,28 +48,39 @@ define(function(require, exports, module) {
     
     // 登录
     $('.submit-login').click(function() {
-    	var name = $("input[name='username']").val();
+    	var account = $("input[name='username']").val();
         var password = $("input[name='password']").val();
         var type = "name";
-        
-        $.ajax({
-            cache: true,
-            type: "POST",
-            url: "/auth/api/login",
-            data: JSON.stringify({
-            	'name': name,
-                'password': password,
-                'type': type
-            }),
-            dataType:"json",
-            async: false,
-            error: function(request) {
-            	console.log(data);
+
+        // $.ajax({
+        //     type : "POST",
+        //     dataType : "json",
+        //     url : "auth/api/login",
+        //     async: false,
+        //     data: {
+        //         account: account,
+        //         password: password,
+        //         type: type
+        //     },
+        //     success : function(data) {
+        //         console.log(data);
+        //         location.href = "/console";
+        //     },
+        //     error : function(request) {
+        //         console.log(request);
+        //     }
+        // });
+
+        $.post(
+            'auth/api/login',
+            {
+                account: account,
+                password: password,
+                type: type
             },
-            success: function(data) {
-            	console.log(data);
-                location.href = "/web/console.html";
+            function (data) {
+                console.log(data);
             }
-        });
+        );
     });
 });

@@ -16,7 +16,7 @@ public class WebController {
 
     private static final Logger logger = Logger.getLogger(WebController.class);
 
-    @RequestMapping(value="/")
+    @RequestMapping(value="/console")
     public String index(){
         return "console";
     }

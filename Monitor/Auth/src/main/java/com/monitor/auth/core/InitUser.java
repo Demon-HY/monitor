@@ -1,10 +1,11 @@
-package com.monitor.auth;
+package com.monitor.auth.core;
 
 import com.alibaba.fastjson.JSONObject;
 import com.monitor.auth.domain.LoginIdInfo;
+import com.monitor.auth.service.LoginIdService;
 import com.monitor.baseservice.exception.LogicalException;
-import com.monitor.user.UserConfig;
-import com.monitor.user.UserService;
+import com.monitor.user.core.UserConfig;
+import com.monitor.user.service.UserService;
 import com.monitor.user.domain.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

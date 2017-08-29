@@ -1,8 +1,10 @@
-package com.monitor.user;
+package com.monitor.user.service;
 
 import com.google.gson.Gson;
 import com.monitor.baseservice.exception.LogicalException;
 import com.monitor.baseservice.utils.SSHAUtils;
+import com.monitor.user.core.UserConfig;
+import com.monitor.user.core.UserRetStat;
 import com.monitor.user.domain.UserInfo;
 import com.monitor.user.domain.UserMapper;
 import org.slf4j.Logger;
@@ -108,5 +110,19 @@ public class UserService {
 
     public UserInfo selectOne(String name) {
         return userMapper.selectOne(new UserInfo(name));
+    }
+
+    /**
+     * 校验用户状态
+     * @param userInfo
+     */
+    public void checkUserStatus(UserInfo userInfo) throws LogicalException {
+        int status = userInfo.getStatus();
+        switch (status) {
+            case UserConfig.STATUS_NORMAL :
+                break;
+            case UserConfig.STATUS_LOCK :
+                throw new LogicalException(UserRetStat.ERR_USER_LOCKED, "" + userInfo.getUid());
+        }
     }
 }

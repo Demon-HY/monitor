@@ -1,4 +1,4 @@
-package com.monitor.auth;
+package com.monitor.auth.core;
 
 public class AuthConfig {
     

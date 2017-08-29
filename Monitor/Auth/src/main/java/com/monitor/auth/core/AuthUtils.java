@@ -1,7 +1,9 @@
-package com.monitor.auth;
+package com.monitor.auth.core;
 
 import com.monitor.baseservice.exception.LogicalException;
-import com.monitor.user.UserRetStat;
+import com.monitor.baseservice.utils.SSHAUtils;
+import com.monitor.baseservice.utils.XCodeUtil;
+import com.monitor.user.core.UserRetStat;
 import com.monitor.user.domain.UserInfo;
 
 import java.io.UnsupportedEncodingException;
@@ -78,7 +80,7 @@ public class AuthUtils {
                 return true;
             }
         } else if (AuthConfig.ALG_SSHA.equals(algorithm)) {
-            return SSHA.verifySaltedPassword(password.getBytes(), psw);
+            return SSHAUtils.verifySaltedPassword(password.getBytes(), psw);
         }
 
         return false;
