@@ -56,14 +56,15 @@ CREATE TABLE IF NOT EXISTS `login_id` (
   UNIQUE KEY (`type`, `name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录表';
 
-CREATE TABLE IF NOT EXISTS `token` (
-  `token` varchar(128) PRIMARY KEY COMMENT '用户登录凭据',
-  `uid` bigint(20) UNSIGNED NOT NULL COMMENT '用户ID',
-  `expires` datetime NOT NULL COMMENT '过期时间',
-  `ctime` datetime NOT NULL COMMENT '创建时间',
-  `ip` varchar(32) DEFAULT NULL COMMENT '客户端IP',
-  `device` varchar(8) DEFAULT NULL COMMENT '客户端设备' /*device=[Web,PC,Android,IOS]*/
-  
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录凭证表';
+# 用 spring session 代替
+# CREATE TABLE IF NOT EXISTS `token` (
+#   `token` varchar(128) PRIMARY KEY COMMENT '用户登录凭据',
+#   `uid` bigint(20) UNSIGNED NOT NULL COMMENT '用户ID',
+#   `expires` datetime NOT NULL COMMENT '过期时间',
+#   `ctime` datetime NOT NULL COMMENT '创建时间',
+#   `ip` varchar(32) DEFAULT NULL COMMENT '客户端IP',
+#   `device` varchar(8) DEFAULT NULL COMMENT '客户端设备' /*device=[Web,PC,Android,IOS]*/
+#
+# ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录凭证表';
 
 -- END 用户/认证模块功能

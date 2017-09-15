@@ -11,6 +11,7 @@ import com.monitor.baseservice.utils.CookieUtils;
 import com.monitor.baseservice.utils.DateUtils;
 import com.monitor.user.core.UserRetStat;
 import com.monitor.user.domain.UserInfo;
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 用户登录认证接口
@@ -32,33 +34,23 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthController {
 
     @Autowired
-    TokenService tokenService;
-    @Autowired
     AuthService authService;
 
     /**
      * 验证登录
-     * 检查 cookie 中 token 是否过期
-     *
-     * @param request
-     * @param response
+     * @param httpSession
      * @return
      */
     @Auth(continueCheck = false)
     @RequestMapping(value = "/api/checkLogin")
     @LoggerManage(description="验证登录")
-    public Long checkLogin(HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookie = CookieUtils.getCookie(request, "TOKEN");
-        if (cookie == null) {
-            return -1L;
+    public Result checkLogin(HttpSession httpSession) {
+        UserInfo userInfo = (UserInfo) httpSession.getAttribute("User");
+        if (userInfo == null) {
+            return Result.error();
         }
 
-        TokenInfo tokenInfo = tokenService.getTokenInfo(cookie.getValue());
-        if (tokenInfo == null) {
-            return -1L;
-        }
-
-        return tokenInfo.getExpires().getTime() - DateUtils.getCurrentTimeMillis();
+        return Result.success();
     }
 
     /**
@@ -82,29 +74,13 @@ public class AuthController {
      * 		描述：账号类型：手机号(phone)/用户名(name)/邮箱(email)<br/>
      * 		必需：YES
      * </blockquote>
-     * @param tokenAge
-     * <blockquote>
-     * 		类型：整形<br/>
-     * 		描述：token 过期时间(单位：毫秒)<br/>
-     * 		必需：NO
-     * </blockquote>
-     * @param isCookie
-     * <blockquote>
-     * 		类型：字符串<br/>
-     * 		描述：是否写入cookie(no,yes)<br/>
-     * 		必需：NO
-     * </blockquote>
      * @return UserInfo
      */
     @RequestMapping("/api/login")
     @Auth(continueCheck = false)
     @ResponseBody
-    public Result login(HttpServletRequest request,
-            String account, String password, String type)
-            throws Exception {
-//        isCookie = null == isCookie ? "yes" : isCookie;
-
-        System.out.println(request.getParameter("type"));
+    public Result login(HttpSession httpSession, HttpServletRequest request,
+                        String account, String password, String type)throws Exception {
 
         // 非法账号类型
         if (!type.equals("name") && !type.equals("email") && !type.equals("phone")) {
@@ -115,9 +91,23 @@ public class AuthController {
 
         UserInfo userInfo = authService.login(account, password, type);
 
-        request.getSession().setAttribute("userInfo", userInfo);
+        httpSession.setAttribute("User", userInfo);
 
-        return null;
+        return Result.success();
+    }
+
+    @RequestMapping("/api/logout")
+    @Auth
+    @ResponseBody
+    public Result logout(HttpSession httpSession)throws Exception {
+        UserInfo userInfo = (UserInfo) httpSession.getAttribute("User");
+        if (userInfo == null) {
+            return Result.error().msg(UserRetStat.getMsgByStat(UserRetStat.ERR_ACCOUNT_EXIST));
+        }
+
+        httpSession.removeAttribute("User");
+
+        return Result.success();
     }
 
 }

@@ -13,6 +13,13 @@ spring:
     address: 127.0.0.1
     session-timeout: 60
 
+  # redis
+  session:
+    store-type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
 #  # static
 #  devtools:
 #    livereload:
