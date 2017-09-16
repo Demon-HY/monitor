@@ -1,0 +1,19 @@
+/* .mul-rows {
+    clear: both;
+    display: block;
+} */
+.mul-l,.mul-btn,.mul-r {
+    float: left;
+}
+.mul-selectd {
+    width: 170px;
+    height: 200px;
+}
+.mul-btn {
+    width: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.mul-btn button {
+    margin-top: 20px;
+}
